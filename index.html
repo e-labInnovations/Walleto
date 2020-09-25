@@ -18,6 +18,7 @@
     />
     <link rel="stylesheet" href="./css/variables.css" />
     <script src="./js/home.js"></script>
+    <script src="./js/components/addDataModal.js"></script>
   </head>
   <body>
     <ion-app>
@@ -27,5 +28,29 @@
       </ion-router>
       <ion-nav></ion-nav>
     </ion-app>
+     <script type="module">
+        import { menuController, modalController } from 'https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/index.esm.js';
+        window.menuController = menuController;
+        window.modalController = modalController;
+        
+        let currentModal = null;
+        //const button = document.querySelector('ion-fab');
+        //button.addEventListener('click', alert('test'));
+
+        async function createModal() {
+          const modal = await modalController.create({
+            component: 'modal-content'
+          });
+
+          await modal.present();
+          currentModal = modal;
+        }
+
+        function dismissModal() {
+          if (currentModal) {
+            currentModal.dismiss().then(() => { currentModal = null; });
+          }
+        }
+    </script>
   </body>
 </html>

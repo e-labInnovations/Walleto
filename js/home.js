@@ -78,32 +78,32 @@ customElements.define(
 
 		<ion-card>
             <ion-card-content>
-        <ion-list>
-        <ion-list-header>
-          09/21 Mon
-        </ion-list-header>
+                <ion-list>
+                <ion-list-header>
+                  09/21 Mon
+                </ion-list-header>
 
-        <ion-item>
-          <ion-avatar slot="start" style="color: #FFF; background-color: #b31f6f;">
-            <ion-icon slot="center" name="barbell"></ion-icon>
-          </ion-avatar>
-          <ion-label>
-            <h2>Finn</h2>
-            <h3>I'm a big deal</h3>
-            <p>Listen, I've had a pretty messed up day...</p>
-          </ion-label>
-        </ion-item>
+                <ion-item>
+                  <ion-avatar slot="start" style="color: #FFF; background-color: #b31f6f;">
+                    <ion-icon name="barbell"></ion-icon>
+                  </ion-avatar>
+                  <ion-label>
+                    <h2>Finn</h2>
+                    <h3>I'm a big deal</h3>
+                    <p>Listen, I've had a pretty messed up day...</p>
+                  </ion-label>
+                </ion-item>
 
-        <ion-item>
-          <ion-avatar slot="start">
-            <ion-icon name="flash"></ion-icon>
-          </ion-avatar>
-          <ion-label>
-            <h2>Han</h2>
-            <h3>Look, kid...</h3>
-            <p>I've got enough on my plate as it is, and I...</p>
-          </ion-label>
-        </ion-item>
+                <ion-item>
+                  <ion-avatar slot="start">
+                    <ion-icon name="flash"></ion-icon>
+                  </ion-avatar>
+                  <ion-label>
+                    <h2>Han</h2>
+                    <h3>Look, kid...</h3>
+                    <p>I've got enough on my plate as it is, and I...</p>
+                  </ion-label>
+                </ion-item>
             </ion-card-content>
             </ion-card>
 
@@ -114,7 +114,7 @@ customElements.define(
 
         <ion-item>
           <ion-avatar slot="start">
-            <img src="./avatar-poe.png">
+            <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
           </ion-avatar>
           <ion-label>
             <h2>Poe</h2>
@@ -125,7 +125,7 @@ customElements.define(
 
         <ion-item>
           <ion-avatar slot="start">
-            <img src="./avatar-ben.png">
+            <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
           </ion-avatar>
           <ion-label>
             <h2>Ben</h2>
@@ -134,12 +134,17 @@ customElements.define(
           </ion-label>
         </ion-item>
       </ion-list>
+      
+      <ion-button expand="block">Show Modal</ion-button>
+      
+      <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button>
+          <ion-icon name="add" onclick="createModal"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+  
       </ion-content>
     </div>
- <script type="module">
-    import { menuController } from 'https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/index.esm.js';
-    window.menuController = menuController;
-</script>
  `;
     }
   }

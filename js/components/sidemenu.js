@@ -3,41 +3,46 @@ customElements.define(
   class extends HTMLElement {
     connectedCallback() {
       this.innerHTML = `
-        <ion-menu side="start" content-id="main-content">
-        <ion-header>
-          <ion-toolbar translucent>
-            <ion-title>Menu</ion-title>
-          </ion-toolbar>
-        </ion-header>
-        <ion-content>
-          <ion-list>
-            <ion-item>
-              <ion-icon name="mail" slot="start"></ion-icon>
-              <ion-label>Inbox</ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-icon name="paper-plane" slot="start"></ion-icon>
-              <ion-label>Outbox</ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-icon name="heart" slot="start"></ion-icon>
-              <ion-label>Favorites</ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-icon name="archive" slot="start"></ion-icon>
-              <ion-label>Archived</ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-icon name="trash" slot="start"></ion-icon>
-              <ion-label>Trash</ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-icon name="warning" slot="start"></ion-icon>
-              <ion-label>Spam</ion-label>
-            </ion-item>
-          </ion-list>
-        </ion-content>
-      </ion-menu>
+      <ion-menu side="start" content-id="main-content">
+      <ion-header>
+        <ion-toolbar translucent>
+          <ion-title>Menu</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list>
+          <ion-item>
+            <ion-icon name="pie-chart-outline" slot="start"></ion-icon>
+            <ion-label>Charts</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="grid-outline" slot="start"></ion-icon>
+            <ion-label>Categories</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="open-outline" slot="start"></ion-icon>
+            <ion-label>Expert</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="settings-outline" slot="start"></ion-icon>
+            <ion-label>Settings</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="star-outline" slot="start"></ion-icon>
+            <ion-label>Rate Us</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="information-circle-outline" slot="start"></ion-icon>
+            <ion-label>About</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+    
+     <script type="module">
+        import { menuController } from 'https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/index.esm.js';
+        window.menuController = menuController;
+    </script>
    `;
     }
   }

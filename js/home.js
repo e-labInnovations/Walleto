@@ -12,28 +12,28 @@ customElements.define(
       <ion-content>
         <ion-list>
           <ion-item>
-            <ion-icon name="mail" slot="start"></ion-icon>
-            <ion-label>Inbox</ion-label>
+            <ion-icon name="pie-chart-outline" slot="start"></ion-icon>
+            <ion-label>Charts</ion-label>
           </ion-item>
           <ion-item>
-            <ion-icon name="paper-plane" slot="start"></ion-icon>
-            <ion-label>Outbox</ion-label>
+            <ion-icon name="grid-outline" slot="start"></ion-icon>
+            <ion-label>Categories</ion-label>
           </ion-item>
           <ion-item>
-            <ion-icon name="heart" slot="start"></ion-icon>
-            <ion-label>Favorites</ion-label>
+            <ion-icon name="open-outline" slot="start"></ion-icon>
+            <ion-label>Expert</ion-label>
           </ion-item>
           <ion-item>
-            <ion-icon name="archive" slot="start"></ion-icon>
-            <ion-label>Archived</ion-label>
+            <ion-icon name="settings-outline" slot="start"></ion-icon>
+            <ion-label>Settings</ion-label>
           </ion-item>
           <ion-item>
-            <ion-icon name="trash" slot="start"></ion-icon>
-            <ion-label>Trash</ion-label>
+            <ion-icon name="star-outline" slot="start"></ion-icon>
+            <ion-label>Rate Us</ion-label>
           </ion-item>
           <ion-item>
-            <ion-icon name="warning" slot="start"></ion-icon>
-            <ion-label>Spam</ion-label>
+            <ion-icon name="information-circle-outline" slot="start"></ion-icon>
+            <ion-label>About</ion-label>
           </ion-item>
         </ion-list>
       </ion-content>
@@ -45,10 +45,10 @@ customElements.define(
           <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
           </ion-buttons>
-          <ion-title>Inbox</ion-title>
+          <ion-title>Walleto</ion-title>
         </ion-toolbar>
       </ion-header>
-      <ion-content class="ion-padding">
+      <ion-content>
         <ion-card>
             <ion-card-content>
                 <ion-grid>
@@ -76,6 +76,8 @@ customElements.define(
             </ion-card-content>
         </ion-card>
 
+		<ion-card>
+            <ion-card-content>
         <ion-list>
         <ion-list-header>
           09/21 Mon
@@ -102,6 +104,8 @@ customElements.define(
             <p>I've got enough on my plate as it is, and I...</p>
           </ion-label>
         </ion-item>
+            </ion-card-content>
+            </ion-card>
 
       <ion-list>
         <ion-list-header>

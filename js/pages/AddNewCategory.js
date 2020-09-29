@@ -2,7 +2,6 @@ import { icons } from '../icons.js';
 
 export default class AddNewCategory extends HTMLElement {
   connectedCallback() {
-    console.log(icons);
     this.innerHTML = `
       <ion-header translucent>
         <ion-toolbar>
@@ -20,8 +19,8 @@ export default class AddNewCategory extends HTMLElement {
       
       <ion-content>
         <ion-item>
-          <ion-avatar slot="start"  style="background-color: #ffaa55;">
-            <ion-icon name="add"></ion-icon>
+          <ion-avatar slot="start"  style="background-color: ${icons[Object.keys(icons)[0]][0].color};">
+            <ion-icon name="${icons[Object.keys(icons)[0]][0].icon}"></ion-icon>
           </ion-avatar>
           <ion-label position="floating">Category Name</ion-label>
           <ion-input id="input-categorie" enterkeyhint="done"></ion-input>
@@ -36,9 +35,32 @@ export default class AddNewCategory extends HTMLElement {
         </ion-select>
       </ion-item>
       
+      <ion-grid class="ion-text-center">
+        ${iconList()}
+      <ion-grid>
+      
       
       </ion-content>
     `;
+    
+    function iconList(){
+        let iconKeys = Object.keys(icons);
+        let ListHTML = iconKeys.map(icon => `
+            <div class="ion-padding"> ${icon} </div>
+            <ion-row>
+                ${
+                    icons[icon].map(iconObj => `
+                <ion-col size="3" onclick="handleIconSelect('${iconObj.icon}','${iconObj.color}')">
+                          <ion-avatar id="avatar-${iconObj.icon}" style="background-color: ${iconObj.icon==icons[Object.keys(icons)[0]][0].icon?iconObj.color:"#F5F5F5"};">
+                            <ion-icon id="icon-${iconObj.icon}" name="${iconObj.icon}" style="color: ${iconObj.icon==icons[Object.keys(icons)[0]][0].icon?"#FFF":"#000"};"></ion-icon>
+                          </ion-avatar>
+                        </ion-col>
+                    `).join("")
+                }
+            </ion-row>
+        `).join("");
+        return ListHTML;
+    }
   }
 }
 

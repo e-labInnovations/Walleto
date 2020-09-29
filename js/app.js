@@ -26,3 +26,9 @@ function dismissModal() {
 function deleteItem(id) {
     alert(id);
 }
+    
+function handleIconSelect(icon, color){
+    let avatarIcon = document.getElementById("avatar-"+icon);
+    let iconIcon = document.getElementById("icon-"+icon);
+    alert(icon + color)
+}

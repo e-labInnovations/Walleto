@@ -1,10 +1,18 @@
+import { icons } from '../icons.js';
+
 export default class AddNewCategory extends HTMLElement {
   connectedCallback() {
+    console.log(icons);
     this.innerHTML = `
       <ion-header translucent>
         <ion-toolbar>
           <ion-buttons slot="start">
             <ion-back-button default-href="/categories"></ion-back-button>
+          </ion-buttons>
+          <ion-buttons slot="end">
+            <ion-button>
+              <ion-icon slot="icon-only" name="checkmark"></ion-icon>
+            </ion-button>
           </ion-buttons>
           <ion-title>Add New Category</ion-title>
         </ion-toolbar>

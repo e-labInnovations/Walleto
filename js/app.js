@@ -22,3 +22,7 @@ function dismissModal() {
   });
   alert(input.value);
 }
+    
+function deleteItem(id) {
+    alert(id);
+}

@@ -5,3 +5,7 @@ ion-avatar {
   align-items:center;
   justify-content:center;
 }
+
+ion-avatar ion-icon {
+  font-size: 20px;
+}

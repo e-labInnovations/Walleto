@@ -1,37 +1,11 @@
 let icons = {
-  "Entertainment": [
-    {
-      "color": "#64ab6a",
-      "icon": "american-football"
-		},
-    {
-      "color": "#64ab6a",
-      "icon": "baseball"
-		},
-    {
-      "color": "#64ab6a",
-      "icon": "basketball"
-		},
-    {
-      "color": "#64ab6a",
-      "icon": "color-palette"
-		},
-    {
-      "color": "#64ab6a",
-      "icon": "football"
-		},
-    {
-      "color": "#64ab6a",
-      "icon": "game-controller"
-		}
-	],
   "Food": [
     {
-      "color": "#ffaabb",
+      "color": "#ffa64c",
       "icon": "fast-food"
 		},
     {
-      "color": "#aaffbb",
+      "color": "#36d900",
       "icon": "nutrition"
 		},
     {
@@ -47,8 +21,34 @@ let icons = {
       "icon": "ice-cream"
 		},
     {
-      "color": "#4eda65",
+      "color": "#ff2693",
       "icon": "beer"
+		}
+	],
+  "Entertainment": [
+    {
+      "color": "#1AB48B",
+      "icon": "american-football"
+		},
+    {
+      "color": "#E1CC6C",
+      "icon": "baseball"
+		},
+    {
+      "color": "#7E6EA3",
+      "icon": "basketball"
+		},
+    {
+      "color": "#FF423A",
+      "icon": "color-palette"
+		},
+    {
+      "color": "#6CC6CC",
+      "icon": "football"
+		},
+    {
+      "color": "#F59EB0",
+      "icon": "game-controller"
 		}
 	],
   "Shopping": [

@@ -17,14 +17,15 @@
 
 <body>
   <ion-app>
-    <ion-router use-hash="false">
+    <ion-router use-hash="true">
     <ion-route url="/" component="home-page"></ion-route>
     <ion-route url="/categories/addNew" component="add-new-category-page"></ion-route>
     <ion-route url="/categories" component="categories-page"></ion-route>
+    <ion-route url="/addItem" component="add-item-page"></ion-route>
     <ion-route url="/test/:tech_title" component="nav-detail"></ion-route>
     </ion-router>
     <ion-nav>
-    </ion-nav
+    </ion-nav>
   </ion-app>
 </body>
 

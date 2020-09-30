@@ -3,7 +3,7 @@ let categories = [
 "id":"food",
 "icon":"restaurant",
 "name":"Food",
-"color":"#FF0000",
+"color":"#2693ff",
 "type":"expenses"
 },{
 "id":"bills",

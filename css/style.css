@@ -14,3 +14,7 @@ ion-avatar ion-icon {
   display: flex;
   align-items:center;
 }
+
+#currentCategoryAvatar {
+    transition: background-color 1s, width 2s, height 2s;
+}

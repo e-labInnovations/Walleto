@@ -7,21 +7,13 @@ const showDetail = (title) => {
 const openAddModal = () => {
   // create the modal with the `modal-page` component
   const modalElement = document.createElement('ion-modal');
-  modalElement.component = 'modal-page';
+  modalElement.component = 'add-item-modal';
   modalElement.cssClass = 'my-custom-class';
   // present the modal
   document.body.appendChild(modalElement);
   return modalElement.present();
 }
 
-function dismissModal() {
-  const input = document.querySelector('#input-name');
-  const modalElement = document.querySelector('ion-modal');
-  modalElement.dismiss({
-    'dismissed': true
-  });
-  alert(input.value);
-}
     
 function deleteItem(id) {
     alert(id);
@@ -30,10 +22,25 @@ function deleteItem(id) {
 function handleIconSelect(icon, color){
     let avatarIcon = document.getElementById("avatar-"+icon);
     let iconIcon = document.getElementById("icon-"+icon);
-    var x, i;
-    x = document.querySelectorAll(".iconAvatar");
-    for (i = 0; i < x.length; i++) {
-      x[i].style.backgroundColor = "#F5F5F5";
+    let currentCategoryAvatar = document.getElementById("currentCategoryAvatar");
+    let currentCategoryIcon = document.getElementById("currentCategoryIcon");
+    
+    currentCategoryAvatar.style.backgroundColor = color;
+    currentCategoryIcon.setAttribute("name", icon);
+    
+    var iconAvatarElements, iconIconElements, i;
+    iconAvatarElements = document.querySelectorAll(".iconAvatar");
+    iconIconElements = document.querySelectorAll(".iconIcon");
+    
+    for (i = 0; i < iconAvatarElements.length; i++) {
+      iconAvatarElements[i].style.backgroundColor = "#F5F5F5";
     }
-    alert(icon + color)
+    for (i = 0; i < iconAvatarElements.length; i++) {
+      iconIconElements[i].style.color = "#000";
+    }
+    
+    iconIcon.style.color = "#FFF";
+    avatarIcon.style.backgroundColor = color;
+    
+    
 }

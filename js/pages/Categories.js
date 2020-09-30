@@ -14,7 +14,6 @@ export default class CategoriesPage extends HTMLElement {
         </ion-toolbar>
       </ion-header>
       
-      <ion-content>
       <ion-segment value="Expenses" id="typeSelector">
         <ion-segment-button value="Expenses">
           <ion-label>Expenses</ion-label>
@@ -23,6 +22,8 @@ export default class CategoriesPage extends HTMLElement {
           <ion-label>Income</ion-label>
         </ion-segment-button>
       </ion-segment>
+      
+      <ion-content>
       
       <ion-list id="categoriesList">
         ${listHTMLData(currentCategories)}

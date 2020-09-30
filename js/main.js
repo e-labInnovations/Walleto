@@ -1,4 +1,3 @@
-    import ModalPage from "./pages/components/addModal.js"
     import HomePage from "./pages/Home.js"
     import CategoriesPage from "./pages/Categories.js"
     import AddNewCategory from "./pages/AddNewCategory.js"

@@ -30,5 +30,10 @@ function deleteItem(id) {
 function handleIconSelect(icon, color){
     let avatarIcon = document.getElementById("avatar-"+icon);
     let iconIcon = document.getElementById("icon-"+icon);
+    var x, i;
+    x = document.querySelectorAll(".iconAvatar");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.backgroundColor = "#F5F5F5";
+    }
     alert(icon + color)
 }

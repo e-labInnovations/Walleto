@@ -51,8 +51,8 @@ export default class AddNewCategory extends HTMLElement {
                 ${
                     icons[icon].map(iconObj => `
                 <ion-col size="3" onclick="handleIconSelect('${iconObj.icon}','${iconObj.color}')">
-                          <ion-avatar id="avatar-${iconObj.icon}" style="background-color: ${iconObj.icon==icons[Object.keys(icons)[0]][0].icon?iconObj.color:"#F5F5F5"};">
-                            <ion-icon id="icon-${iconObj.icon}" name="${iconObj.icon}" style="color: ${iconObj.icon==icons[Object.keys(icons)[0]][0].icon?"#FFF":"#000"};"></ion-icon>
+                          <ion-avatar class="iconAvatar" id="avatar-${iconObj.icon}" style="background-color: ${iconObj.icon==icons[Object.keys(icons)[0]][0].icon?iconObj.color:"#F5F5F5"};">
+                            <ion-icon class="iconIcon" id="icon-${iconObj.icon}" name="${iconObj.icon}" style="color: ${iconObj.icon==icons[Object.keys(icons)[0]][0].icon?"#FFF":"#000"};"></ion-icon>
                           </ion-avatar>
                         </ion-col>
                     `).join("")

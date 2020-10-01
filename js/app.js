@@ -44,3 +44,27 @@ function handleIconSelect(icon, color){
     
     
 }
+
+function handleCategorySelect(icon, color, id){
+    let avatarIcon = document.getElementById("avatar-"+id);
+    let iconIcon = document.getElementById("icon-"+id);
+    let currentCategoryAvatar = document.getElementById("currentCategoryAvatar");
+    let currentCategoryIcon = document.getElementById("currentCategoryIcon");
+    
+    currentCategoryAvatar.style.backgroundColor = color;
+    currentCategoryIcon.setAttribute("name", icon);
+    
+    var iconAvatarElements, iconIconElements, i;
+    iconAvatarElements = document.querySelectorAll(".iconAvatar");
+    iconIconElements = document.querySelectorAll(".iconIcon");
+    
+    for (i = 0; i < iconAvatarElements.length; i++) {
+      iconAvatarElements[i].style.backgroundColor = "#F5F5F5";
+    }
+    for (i = 0; i < iconAvatarElements.length; i++) {
+      iconIconElements[i].style.color = "#000";
+    }
+    
+    iconIcon.style.color = "#FFF";
+    avatarIcon.style.backgroundColor = color; 
+}

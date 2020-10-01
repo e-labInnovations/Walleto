@@ -2,7 +2,7 @@ import { categories } from '../categories.js';
 
 export default class CategoriesPage extends HTMLElement {
   connectedCallback() {
-    let currentCategories = categories.filter(categorie => categorie.type != "income");
+    let currentCategories = categories.filter(categorie => categorie.type != "income").sort(sortByName());
     
     this.innerHTML = `
       <ion-header translucent>
@@ -48,7 +48,7 @@ export default class CategoriesPage extends HTMLElement {
         } else {
             currentCategories = categories.filter(categorie => categorie.type != "income");
         }
-        categoriesList.innerHTML = listHTMLData(currentCategories);
+        categoriesList.innerHTML = listHTMLData(currentCategories.sort(sortByName()));
         
     })
     
@@ -79,6 +79,28 @@ export default class CategoriesPage extends HTMLElement {
         `
           )
           .join("")
+    }
+    
+    function sortByName() {
+      return function(a, b) {
+          var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+          var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+          if (nameA == 'OTHER' | a.userAdded) {
+            return 1;
+          }
+          if (nameB == 'OTHER' | b.userAdded) {
+            return -1;
+          }
+          if (nameA < nameB) {
+            return -1;
+          }
+          if (nameA > nameB) {
+            return 1;
+          }
+
+          // names must be equal
+          return 0;
+        }
     }
   }
 }

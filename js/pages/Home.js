@@ -83,7 +83,7 @@ export default class HomePage extends HTMLElement {
                 <component-item-card></component-item-card>
               
               <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-                <ion-fab-button onclick="openAddModal()">
+                <ion-fab-button href="/addItem">
                   <ion-icon name="add"></ion-icon>
                 </ion-fab-button>
               </ion-fab>

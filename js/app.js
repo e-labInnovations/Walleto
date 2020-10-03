@@ -4,11 +4,11 @@ const showDetail = (title) => {
   nav.push('nav-detail', { tech });
 }
 
-const openAddModal = () => {
+const openDetailedItemModal = () => {
   // create the modal with the `modal-page` component
   const modalElement = document.createElement('ion-modal');
-  modalElement.component = 'add-item-modal';
-  modalElement.cssClass = 'my-custom-class';
+  modalElement.component = 'detailed-item-modal';
+  //modalElement.cssClass = 'my-custom-class';
   // present the modal
   document.body.appendChild(modalElement);
   return modalElement.present();

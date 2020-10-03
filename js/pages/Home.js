@@ -3,8 +3,8 @@ import addNewItemModal from "./components/addModal.js";
 import { menuController } from 'https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/index.esm.js';
 
 export default class HomePage extends HTMLElement {
-      connectedCallback() {
-        this.innerHTML = `
+  connectedCallback() {
+    this.innerHTML = `
           <ion-menu side="start" content-id="main-content">
               <ion-header>
                 <ion-toolbar translucent>
@@ -63,22 +63,25 @@ export default class HomePage extends HTMLElement {
                                         <h1>May</h1>
                                     </ion-text>
                                 </ion-col>
+                                <div class="verticalLine"></div>
                                 <ion-col class="ion-text-center">
                                     <ion-text color="secondary">
                                         <p>Income</p>
-                                        <h1>0.00</h1>
+                                        <h1>0.00$</h1>
                                     </ion-text>
                                 </ion-col>
+                                <div class="verticalLine"></div>
                                 <ion-col class="ion-text-center">
                                     <ion-text color="secondary">
                                         <p>Expense</p>
-                                        <h1>0.00</h1>
+                                        <h1>0.00$</h1>
                                     </ion-text>
                                 </ion-col>
                             </ion-row>
                         </ion-grid>
                     </ion-card-content>
                 </ion-card>
+                <component-item-card></component-item-card>
                 <component-item-card></component-item-card>
                 <component-item-card></component-item-card>
               
@@ -91,13 +94,13 @@ export default class HomePage extends HTMLElement {
               </ion-content>
             </div>
         `;
-        let router = document.querySelector('ion-router');
-        router.addEventListener("ionRouteWillChange", () => {
-            if(menuController.isOpen()){
-                menuController.close();
-            }
-        })
+    let router = document.querySelector('ion-router');
+    router.addEventListener("ionRouteWillChange", () => {
+      if (menuController.isOpen()) {
+        menuController.close();
       }
-    }
-    
+    })
+  }
+}
+
 customElements.define("home-page", HomePage);

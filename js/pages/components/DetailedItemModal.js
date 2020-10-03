@@ -1,6 +1,6 @@
 import { categories } from '../../categories.js';
 
-export default class addNewItemModal extends HTMLElement {
+export default class DetailedItemModal extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
     <ion-header>
@@ -71,4 +71,4 @@ export default class addNewItemModal extends HTMLElement {
   }
 }
 
-customElements.define("add-item-modal", addNewItemModal);
+customElements.define("detailed-item-modal", DetailedItemModal);

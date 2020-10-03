@@ -18,3 +18,10 @@ ion-avatar ion-icon {
 #currentCategoryAvatar {
     transition: background-color 1s, width 2s, height 2s;
 }
+
+.verticalLine {
+  width: 0.5%;
+  height: auto;
+  background: #CCC;
+  position: relative;
+}

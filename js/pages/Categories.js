@@ -54,9 +54,10 @@ export default class CategoriesPage extends HTMLElement {
     
     function listHTMLData(categories) {
         return currentCategories.map(
-            (categorie) => `
+            (category) => `
               <ion-item-sliding>
-                <ion-item-options side="start" onclick="deleteItem('${categorie.id}')">
+                ${category.userAdded ? `
+                <ion-item-options side="start" onclick="deleteItem('${category.id}')">
                   <ion-item-option color="danger">
                     <ion-icon slot="icon-only" name="trash"></ion-icon>
                   </ion-item-option>
@@ -66,13 +67,14 @@ export default class CategoriesPage extends HTMLElement {
                     <ion-icon slot="icon-only" name="create"></ion-icon>
                   </ion-item-option>
                 </ion-item-options>
+                ` : ''}
                 
                 <ion-item>
-                  <ion-avatar slot="start"  style="background-color: ${categorie.color};">
-                    <ion-icon name="${categorie.icon}"></ion-icon>
+                  <ion-avatar slot="start"  style="background-color: ${category.color};">
+                    <ion-icon name="${category.icon}"></ion-icon>
                   </ion-avatar>
                   <ion-label>
-                    <h3>${categorie.name}</h3>
+                    <h3>${category.name}</h3>
                   </ion-label>
                 </ion-item>
               </ion-item-sliding>

@@ -1,5 +1,4 @@
 import ItemCard from "./components/ItemCard.js";
-import addNewItemModal from "./components/addModal.js";
 import { menuController } from 'https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/index.esm.js';
 
 export default class HomePage extends HTMLElement {
@@ -94,12 +93,12 @@ export default class HomePage extends HTMLElement {
               </ion-content>
             </div>
         `;
-    let router = document.querySelector('ion-router');
-    router.addEventListener("ionRouteWillChange", () => {
-      if (menuController.isOpen()) {
-        menuController.close();
-      }
-    })
+        let router = document.querySelector('ion-router');
+        router.addEventListener("ionRouteWillChange", () => {
+          if (menuController.isOpen()) {
+            menuController.close();
+          }
+        })
   }
 }
 

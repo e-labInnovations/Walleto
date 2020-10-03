@@ -1,25 +1,30 @@
 const nav = document.querySelector('ion-nav');
+
+const data = {
+    test : "data"
+}
 const showDetail = (title) => {
   const tech = techs.find(tech => tech.title === title);
   nav.push('nav-detail', { tech });
 }
 
-const openDetailedItemModal = () => {
+const openDetailedItemModal = (id) => {
   // create the modal with the `modal-page` component
   const modalElement = document.createElement('ion-modal');
   modalElement.component = 'detailed-item-modal';
   //modalElement.cssClass = 'my-custom-class';
+    modalElement.componentProps = {id};
   // present the modal
   document.body.appendChild(modalElement);
   return modalElement.present();
 }
 
     
-function deleteItem(id) {
+const deleteItem = (id) => {
     alert(id);
 }
     
-function handleIconSelect(icon, color){
+const handleIconSelect = (icon, color) => {
     let avatarIcon = document.getElementById("avatar-"+icon);
     let iconIcon = document.getElementById("icon-"+icon);
     let currentCategoryAvatar = document.getElementById("currentCategoryAvatar");
@@ -45,7 +50,7 @@ function handleIconSelect(icon, color){
     
 }
 
-function handleCategorySelect(icon, color, id){
+const handleCategorySelect = (icon, color, id) => {
     let avatarIcon = document.getElementById("avatar-"+id);
     let iconIcon = document.getElementById("icon-"+id);
     let currentCategoryAvatar = document.getElementById("currentCategoryAvatar");
@@ -67,4 +72,57 @@ function handleCategorySelect(icon, color, id){
     
     iconIcon.style.color = "#FFF";
     avatarIcon.style.backgroundColor = color; 
+}
+
+const getAllItems = () => {
+    var items = JSON.parse(localStorage.getItem('Walleto-allItems'));
+    if(items == null) {
+        items = []
+        localStorage.setItem('Walleto-allItems',JSON.stringify([]));
+    }
+    return items;
+}
+
+const addItem = (newItem) => {
+    var items = JSON.parse(localStorage.getItem('Walleto-allItems'));
+    if(items == null) {
+        items = []
+        localStorage.setItem('Walleto-allItems',JSON.stringify(items));
+    }
+    items.push(newItem);
+    localStorage.setItem('Walleto-allItems',JSON.stringify(items));
+}
+
+const getCategories = () => {
+    var items = JSON.parse(localStorage.getItem('Walleto-categories'));
+    if(items == null) {
+        items = [
+        {
+        "id":"food",
+        "icon":"restaurant",
+        "name":"Food",
+        "color":"#2693ff",
+        "type":"expenses",
+        "userAdded":false
+        },{
+        "id":"bills",
+        "icon":"receipt",
+        "name":"Bills",
+        "color":"#FF0000",
+        "type":"expenses",
+        "userAdded":false
+        }]
+        localStorage.setItem('Walleto-categories',JSON.stringify(items));
+    }
+    return items;
+}
+
+const addCategoryItem = (newItem) => {
+    var items = JSON.parse(localStorage.getItem('Walleto-categories'));
+    if(items == null) {
+        items = []
+        localStorage.setItem('Walleto-categories',JSON.stringify(items));
+    }
+    items.push(newItem);
+    localStorage.setItem('Walleto-categories',JSON.stringify(items));
 }

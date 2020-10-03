@@ -6,7 +6,7 @@ export default class ItemCard extends HTMLElement {
 		    <ion-card-subtitle>09/21 Mon  <span class="ion-float-right"> Income: 60 Expenses: 50</span> </ion-card-subtitle>
 		  </ion-card-header>
             <ion-card-content>
-                <ion-item detail button onclick="openDetailedItemModal>
+                <ion-item detail button onclick="openDetailedItemModal('id01')">
                   <ion-avatar style="background-color: #4CAF50;" slot="start">
                     <ion-icon name="barbell"></ion-icon>
                   </ion-avatar>
@@ -15,7 +15,7 @@ export default class ItemCard extends HTMLElement {
                   </ion-label>
                 </ion-item>
 
-                <ion-item detail button>
+                <ion-item detail button onclick="openDetailedItemModal('id02')">
                   <ion-avatar slot="start"  style="background-color: #2196F3;">
                     <ion-icon name="flash"></ion-icon>
                   </ion-avatar>

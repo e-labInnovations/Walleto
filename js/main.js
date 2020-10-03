@@ -2,7 +2,7 @@
     import CategoriesPage from "./pages/Categories.js"
     import AddNewCategory from "./pages/AddNewCategory.js"
     import AddItem from './pages/AddItem.js'
-    import DetailedItemModel from './pages/components/DetailedItemModel.js'
+    import DetailedItemModal from './pages/components/DetailedItemModal.js'
     
     const techs = [
       {

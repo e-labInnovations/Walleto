@@ -117,12 +117,19 @@ const getCategories = () => {
     return items;
 }
 
-const addCategoryItem = (newItem) => {
+const addCategoryItem = (newItem, callback) => {
     var items = JSON.parse(localStorage.getItem('Walleto-categories'));
     if(items == null) {
         items = []
         localStorage.setItem('Walleto-categories',JSON.stringify(items));
     }
-    items.push(newItem);
-    localStorage.setItem('Walleto-categories',JSON.stringify(items));
+    var isExist = items.some(category => category.id == newItem.id);
+    if (isExist) {
+      callback('Category already exist')
+    } else {
+       items.push(newItem);
+       localStorage.setItem('Walleto-categories', JSON.stringify(items));
+       callback(undefined)
+    }
 }
+

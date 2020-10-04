@@ -1,7 +1,8 @@
-import { categories } from '../categories.js';
+//import { categories } from '../categories.js';
 
 export default class CategoriesPage extends HTMLElement {
   connectedCallback() {
+    var categories = getCategories(); //From app.js
     let currentCategories = categories.filter(categorie => categorie.type != "income").sort(sortByName());
     
     this.innerHTML = `

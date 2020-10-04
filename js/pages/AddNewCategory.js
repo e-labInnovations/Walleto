@@ -27,7 +27,7 @@ export default class AddNewCategory extends HTMLElement {
       
         <ion-item>
             <ion-label>Type</ion-label>
-            <ion-select value="expenses">
+            <ion-select value="expenses" id="categorySelect">
                 <ion-select-option value="expenses">Expenses</ion-select-option>
                 <ion-select-option value="income">Income</ion-select-option>
                 <ion-select-option value="both">Both</ion-select-option>
@@ -45,13 +45,37 @@ export default class AddNewCategory extends HTMLElement {
     `;
     
     const btnSubmit = document.getElementById('btnSubmit');
-    btnSubmit.addEventListener("click", () => {
-      alert("Test");
-      let router = document.querySelector('ion-router');
-      router.back();
+    btnSubmit.addEventListener("click", () => {    
+        const currentCategoryAvatar = document.getElementById("currentCategoryAvatar");
+        const currentCategoryIcon = document.getElementById("currentCategoryIcon");
+        const inputCategorieName = document.getElementById("input-categorie");
+        const categorySelect = document.getElementById("categorySelect");
+        const router = document.querySelector('ion-router');
+        
+        const icon = currentCategoryIcon.getAttribute("name");
+        const name = inputCategorieName.value;
+        const id = name.toLowerCase();
+        const color = rgb2hex(currentCategoryAvatar.style.backgroundColor);
+        const type = categorySelect.value;
+        const userAdded = true;
+        
+        if(!name) {
+            presentErrorAlert("Enter a name")
+        } else {
+            const newItem = {id, icon, name, color, type, userAdded};
+            addCategoryItem(newItem, (error, data) => {
+                if(error) {
+                    presentErrorAlert(error)
+                } else {
+                    presentToast("New category added successfully");
+                    router.back();
+                }
+            })
+            
+        }
     });
     
-    function iconList(){
+    function iconList() {
         let iconKeys = Object.keys(icons);
         let ListHTML = iconKeys.map(icon => `
             <div class="ion-padding"> ${icon} </div>
@@ -68,6 +92,17 @@ export default class AddNewCategory extends HTMLElement {
             </ion-row>
         `).join("");
         return ListHTML;
+    }
+    
+    const presentErrorAlert = (message) => {
+        const alert = document.createElement('ion-alert');
+        alert.header = 'Error';
+        //alert.subHeader = 'Subtitle';
+        alert.message = message;
+        alert.buttons = ['OK'];
+
+        document.body.appendChild(alert);
+        return alert.present();
     }
   }
 }

@@ -1,28 +1,28 @@
 export default class ItemCard extends HTMLElement {
       connectedCallback() {
+          let itemsObj = getWalletoItemsByDate(this.getAttribute("date"));
+          let items = itemsObj.newItems;
+          
         this.innerHTML = `
 		<ion-card>
 		<ion-card-header>
-		    <ion-card-subtitle>09/21 Mon  <span class="ion-float-right"> Income: 60 Expenses: 50</span> </ion-card-subtitle>
+		    <ion-card-subtitle>${this.getAttribute("date")} <span class="ion-float-right"> Income: ${itemsObj.totalIncome} Expenses: -${itemsObj.totalExpenses}</span> </ion-card-subtitle>
 		  </ion-card-header>
             <ion-card-content>
-                <ion-item detail button onclick="openDetailedItemModal('id01')">
-                  <ion-avatar style="background-color: #4CAF50;" slot="start">
-                    <ion-icon name="barbell"></ion-icon>
-                  </ion-avatar>
-                  <ion-label>
-                    <h3>Finn <span class="ion-float-right"> -50 </span></h3>
-                  </ion-label>
-                </ion-item>
-
-                <ion-item detail button onclick="openDetailedItemModal('id02')">
-                  <ion-avatar slot="start"  style="background-color: #2196F3;">
-                    <ion-icon name="flash"></ion-icon>
-                  </ion-avatar>
-                  <ion-label>
-                    <h3>Han <span class="ion-float-right"> 60 </span></h3>
-                  </ion-label>
-                </ion-item>
+            
+                ${items.map(item => {
+                    return `
+                    <ion-item detail button onclick="openDetailedItemModal('${item.id}')">
+                      <ion-avatar style="background-color: ${item.category.color};" slot="start">
+                        <ion-icon name="${item.category.icon}"></ion-icon>
+                      </ion-avatar>
+                      <ion-label>
+                        <h3>${item.memo} <span class="ion-float-right"> ${item.type === 'income' ? "" : "-"}${item.money} </span></h3>
+                      </ion-label>
+                    </ion-item>
+                    `}).join("")
+                }
+                
             </ion-card-content>
             </ion-card>
         `;

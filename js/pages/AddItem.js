@@ -1,7 +1,8 @@
-import { categories } from '../categories.js';
+//import { categories } from '../categories.js';
 
 export default class addItem extends HTMLElement {
   connectedCallback() {
+    const categories = getCategories(); //From app.js
     let currentCategories = categories.filter(category => category.type != "income").sort(sortByName());
     this.innerHTML = `
     <ion-header translucent>
@@ -18,16 +19,16 @@ export default class addItem extends HTMLElement {
     
     
     <ion-item>
-        <ion-avatar id="currentCategoryAvatar" slot="start"  style="background-color: ${currentCategories[0].color};">
+        <ion-avatar id="currentCategoryAvatar" slot="start" category="${currentCategories[0].id}" style="background-color: ${currentCategories[0].color};">
             <ion-icon id="currentCategoryIcon" name="${currentCategories[0].icon}"></ion-icon>
         </ion-avatar>
         <ion-grid>
             <ion-row>
                 <ion-col size="8">
-                    <ion-input placeholder="Memo" autocomplete="on" id="input-category" enterkeyhint="next" spellcheck=true></ion-input>
+                    <ion-input placeholder="Memo" autocomplete="on" id="input-memo" enterkeyhint="next" spellcheck=true></ion-input>
                 </ion-col>
                 <ion-col size="4">
-                    <ion-input class="ion-text-end" placeholder="Amount" type="number" autofocus=true enterkeyhint="done" inputmode="numeric" required=true style="font-weight: bold; font-size:18px;"></ion-input>
+                    <ion-input class="ion-text-end" placeholder="Amount" id="input-amount" type="number" autofocus=true enterkeyhint="done" inputmode="numeric" required=true style="font-weight: bold; font-size:18px;"></ion-input>
                 </ion-col>
             </ion-row>
         </ion-grid>
@@ -52,7 +53,6 @@ export default class addItem extends HTMLElement {
 
 
     const btnSubmit = document.getElementById("btnSubmit");
-    const input = document.getElementById('input-name');
     const typeSelector = document.getElementById('typeSelector');
     const categoriesList = document.getElementById('categoriesList');
     
@@ -73,7 +73,33 @@ export default class addItem extends HTMLElement {
     })
 
     btnSubmit.addEventListener("click", () => {
-      alert(input.value);
+        const memoInput = document.getElementById('input-memo');
+        const amountInput = document.getElementById('input-amount');
+        const dateInput = document.querySelector('ion-datetime');
+        const typeSelector = document.getElementById('typeSelector');
+        
+        const category = document.getElementById("currentCategoryAvatar").getAttribute("category");
+        const money = amountInput.value;
+        const type = typeSelector.value;
+        const date = dateInput.value;
+        const memo = memoInput.value ? memoInput.value : "";
+        const newItem = {category, money, date, memo, type}
+        if(!money>0) {
+            const alert = document.createElement('ion-alert');
+            alert.header = 'Error';
+            //alert.subHeader = 'Subtitle';
+            alert.message = "Fill the Amount field";
+            alert.buttons = ['OK'];
+
+            document.body.appendChild(alert);
+            return alert.present();
+        } else {
+            addWalletoItem(newItem, (error, data) => {
+                presentToast("New item added successfully");
+                document.querySelector('ion-router').back();
+            })
+        }
+        
     });
 
     function listCategories(currentCategories) {

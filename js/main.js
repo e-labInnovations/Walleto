@@ -1,8 +1,21 @@
-    import HomePage from "./pages/Home.js"
-    import CategoriesPage from "./pages/Categories.js"
-    import AddNewCategory from "./pages/AddNewCategory.js"
-    import AddItem from './pages/AddItem.js'
-    import DetailedItemModal from './pages/components/DetailedItemModal.js'
+import HomePage from "./pages/Home.js"
+import CategoriesPage from "./pages/Categories.js"
+import AddNewCategory from "./pages/AddNewCategory.js"
+import AddItem from './pages/AddItem.js'
+import DetailedItemModal from './pages/components/DetailedItemModal.js'
+const Router = document.querySelector('ion-router');
+
+Router.addEventListener('ionRouteDidChange', (e) => {
+    let routeTo = e.detail.to;
+    let routerFrom = e.detail.from;
+    
+    if(routeTo === '/categories' && routerFrom === '/categories/addNew') {
+        document.querySelector('categories-page').connectedCallback()
+    }
+    if(routeTo === '/' && routerFrom === '/addItem') {
+        document.querySelector('home-page').connectedCallback()
+    }
+})
     
     const techs = [
       {

@@ -28,7 +28,7 @@ export default class HomePage extends HTMLElement {
                         <ion-icon name="open-outline" slot="start"></ion-icon>
                         <ion-label>Expert</ion-label>
                       </ion-item>
-                      <ion-item>
+                      <ion-item href="/settings">
                         <ion-icon name="settings-outline" slot="start"></ion-icon>
                         <ion-label>Settings</ion-label>
                       </ion-item>
@@ -51,7 +51,7 @@ export default class HomePage extends HTMLElement {
                         <ion-menu-button></ion-menu-button>
                       </ion-buttons>
                       <ion-buttons slot="end">
-                        <ion-icon  slot="icon-only"  ios="ios-options-outline" md="md-options"></ion-icon>
+                        <ion-icon  slot="icon-only" class="icon-tool" ios="ios-options-outline" md="md-options"></ion-icon>
                       </ion-buttons>
                       <ion-title>Walleto</ion-title>
                     </ion-toolbar>

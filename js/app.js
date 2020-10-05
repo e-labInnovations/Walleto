@@ -1,10 +1,5 @@
 const nav = document.querySelector('ion-nav');
 
-const showDetail = (title) => {
-  const tech = techs.find(tech => tech.title === title);
-  nav.push('nav-detail', { tech });
-}
-
 const openDetailedItemModal = (id) => {
   // create the modal with the `modal-page` component
   const modalElement = document.createElement('ion-modal');

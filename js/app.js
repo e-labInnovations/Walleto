@@ -39,14 +39,14 @@ const deleteItem = (id) => {
     const alert = document.createElement('ion-alert');
     alert.header = 'Alert';
     //alert.subHeader = 'Subtitle';
-    alert.message = `Do you really want delete ${categoryItem.name} category?`;
+    alert.message = `Do you really want to delete the <b>${categoryItem.name}</b> category? <br /> You will <b>lose all added items under the ${categoryItem.name}</b> category!`;
     alert.buttons = [
         {
-          text: 'No',
+          text: 'Cancel',
           role: 'cancel',
           cssClass: 'secondary'
         }, {
-          text: 'Yes',
+          text: 'Delete',
           handler: deleteItem
         }
       ];
@@ -88,7 +88,7 @@ const handleCategorySelect = (icon, color, id) => {
     let currentCategoryIcon = document.getElementById("currentCategoryIcon");
     
     currentCategoryAvatar.style.backgroundColor = color;
-    currentCategoryAvatar.setAttribute("category", id)
+    currentCategoryAvatar.setAttribute("category", id);
     currentCategoryIcon.setAttribute("name", icon);
     
     var iconAvatarElements, iconIconElements, i;
@@ -152,6 +152,7 @@ const addWalletoItem = (newItem, callback) => {
     
     items.push(newItem);
     localStorage.setItem('Walleto-allItems', JSON.stringify(items));
+    sessionStorage.setItem("refreshHome", true);
     callback(undefined, items);
 }
 
@@ -166,6 +167,7 @@ const getWalletoItemsByDate = (date) => {
         item.category = categoryObj;
         return item;
     });
+    newItems = newItems.reverse();
     
     let expenseArray = newItems.filter(item => item.type === "expenses").map(item => Number(item.money));
     let incomeArray = newItems.filter(item => item.type === "income").map(item => Number(item.money));
@@ -213,16 +215,24 @@ const addCategoryItem = (newItem, callback) => {
     } else {
        items.push(newItem);
        localStorage.setItem('Walleto-categories', JSON.stringify(items));
+       sessionStorage.setItem("refreshCategories", true);
        callback(undefined, items)
     }
 }
 
 const deleteCategoryItem = (id, callback) => {
     let categories = getCategories();
+    let walletoItems = getWalletoItems();
     categories = categories.filter((item) => {
         return item.id !== id;
     });
+    walletoItems = walletoItems.filter((item) => {
+        return item.category !== id;
+    });
     localStorage.setItem('Walleto-categories', JSON.stringify(categories));
+    localStorage.setItem('Walleto-allItems', JSON.stringify(walletoItems));
+    sessionStorage.setItem("refreshHome", true);
+    
     callback(categories)
 }
 

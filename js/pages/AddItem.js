@@ -69,6 +69,7 @@ export default class addItem extends HTMLElement {
         categoriesList.innerHTML = listCategories(currentCategories.sort(sortByName()));
         currentCategoryAvatar.style.backgroundColor = currentCategories[0].color;
         currentCategoryIcon.setAttribute("name", currentCategories[0].icon);
+        currentCategoryAvatar.setAttribute("category", currentCategories[0].id);
         
     })
 

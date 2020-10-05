@@ -9,12 +9,23 @@ Router.addEventListener('ionRouteDidChange', (e) => {
     let routeTo = e.detail.to;
     let routerFrom = e.detail.from;
     
-    if(routeTo === '/categories' && routerFrom === '/categories/addNew') {
-        document.querySelector('categories-page').connectedCallback()
+    if(routeTo === '/') {
+        let refresh = sessionStorage.getItem("refreshHome");
+        if(refresh) {
+            document.querySelector('home-page').connectedCallback();
+            sessionStorage.setItem("refreshHome", false);
+        }
     }
-    if(routeTo === '/' && routerFrom === '/addItem') {
-        document.querySelector('home-page').connectedCallback()
+    if(routeTo === '/categories') {
+        let refresh = sessionStorage.getItem("refreshCategories");
+        if(refresh) {
+            document.querySelector('categories-page').connectedCallback();
+            sessionStorage.setItem("refreshCategories", false);
+        }
     }
+    // if(routeTo === '/' && routerFrom === '/addItem') {
+        // document.querySelector('home-page').connectedCallback()
+    // }
 })
     
     const techs = [

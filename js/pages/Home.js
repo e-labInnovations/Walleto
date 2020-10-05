@@ -50,6 +50,9 @@ export default class HomePage extends HTMLElement {
                       <ion-buttons slot="start">
                         <ion-menu-button></ion-menu-button>
                       </ion-buttons>
+                      <ion-buttons slot="end">
+                        <ion-icon  slot="icon-only"  ios="ios-options-outline" md="md-options"></ion-icon>
+                      </ion-buttons>
                       <ion-title>Walleto</ion-title>
                     </ion-toolbar>
                   </ion-header>

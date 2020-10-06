@@ -3,7 +3,7 @@ import { menuController } from 'https://cdn.jsdelivr.net/npm/@ionic/core/dist/io
 
 export default class HomePage extends HTMLElement {
     connectedCallback() {
-        let HomeData = getHomeData();
+        let HomeData = getHomeData(); //from app.js
         let dateArray = getHomeData().dateArray;
         
         this.innerHTML = `
@@ -50,7 +50,7 @@ export default class HomePage extends HTMLElement {
                       <ion-buttons slot="start">
                         <ion-menu-button></ion-menu-button>
                       </ion-buttons>
-                      <ion-buttons slot="end">
+                      <ion-buttons slot="end" onclick="presentToast('Not implemented')">
                         <ion-icon  slot="icon-only" class="icon-tool" ios="ios-options-outline" md="md-options"></ion-icon>
                       </ion-buttons>
                       <ion-title>Walleto</ion-title>
@@ -64,13 +64,6 @@ export default class HomePage extends HTMLElement {
                                 <ion-row>
                                     <ion-col class="ion-text-center">
                                         <ion-text color="secondary">
-                                            <p>2020</p>
-                                            <h1>May</h1>
-                                        </ion-text>
-                                    </ion-col>
-                                    <div class="verticalLine"></div>
-                                    <ion-col class="ion-text-center">
-                                        <ion-text color="secondary">
                                             <p>Income</p>
                                             <h1>${HomeData.totalIncome}</h1>
                                         </ion-text>
@@ -80,6 +73,13 @@ export default class HomePage extends HTMLElement {
                                         <ion-text color="secondary">
                                             <p>Expense</p>
                                             <h1>${HomeData.totalExpenses}</h1>
+                                        </ion-text>
+                                    </ion-col>
+                                    <div class="verticalLine"></div>
+                                    <ion-col class="ion-text-center">
+                                        <ion-text color="secondary">
+                                            <p>Balance</p>
+                                            <h1>${Number(HomeData.totalIncome) - Number(HomeData.totalExpenses)}</h1>
                                         </ion-text>
                                     </ion-col>
                                 </ion-row>

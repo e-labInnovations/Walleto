@@ -17,7 +17,7 @@ export default class ItemCard extends HTMLElement {
                         <ion-icon name="${item.category.icon}"></ion-icon>
                       </ion-avatar>
                       <ion-label>
-                        <h3>${item.memo} <span class="ion-float-right"> ${item.type === 'income' ? "" : "-"}${item.money} </span></h3>
+                        <h2>${item.memo.length>0?item.memo:item.category.name} <span class="ion-float-right"> ${item.type === 'income' ? "" : "-"}${item.money} </span></h2>
                       </ion-label>
                     </ion-item>
                     `}).join("")

@@ -1,16 +1,18 @@
 const nav = document.querySelector('ion-nav');
+let walletoItems = null;
+let categories = null;
 
+//Handles
+//Open detailed item model in Home.js
 const openDetailedItemModal = (id) => {
-  // create the modal with the `modal-page` component
   const modalElement = document.createElement('ion-modal');
   modalElement.component = 'detailed-item-modal';
-  //modalElement.cssClass = 'my-custom-class';
     modalElement.componentProps = {id};
-  // present the modal
   document.body.appendChild(modalElement);
   return modalElement.present();
 }
 
+//Show toast message
 async function presentToast(msg) {
   const toast = document.createElement('ion-toast');
   toast.message = msg;
@@ -20,8 +22,8 @@ async function presentToast(msg) {
   return toast.present();
 }
 
-    
-const deleteItem = (id) => {
+//Handle delete category item request in Categories.js
+const handleDeleteCategoryItem = (id) => {
     let categoryItem = getCategories().find(category => category.id == id);
     
     const deleteItem = () => {
@@ -50,6 +52,7 @@ const deleteItem = (id) => {
     return alert.present();
 }
     
+//Handle icon select in AddNewCategory.js
 const handleIconSelect = (icon, color) => {
     let avatarIcon = document.getElementById("avatar-"+icon);
     let iconIcon = document.getElementById("icon-"+icon);
@@ -76,6 +79,7 @@ const handleIconSelect = (icon, color) => {
     
 }
 
+//Handle category select (category icon) in AddItem.js
 const handleCategorySelect = (icon, color, id) => {
     let avatarIcon = document.getElementById("avatar-"+id);
     let iconIcon = document.getElementById("icon-"+id);
@@ -101,8 +105,39 @@ const handleCategorySelect = (icon, color, id) => {
     avatarIcon.style.backgroundColor = color; 
 }
 
+//Handle delete wallet item request in DetailedItemModal.js 
+const handleDeleteWalletoItem = (id) => {
+    const modalElement = document.querySelector('ion-modal');
+    const deleteItem = () => {
+        deleteWalletoItem(id, (data) => {
+            modalElement.dismiss({
+                'dismissed': true
+            });
+            document.querySelector('home-page').connectedCallback();
+        })
+    }
+    
+    const alert = document.createElement('ion-alert');
+    alert.header = 'Alert';
+    alert.message = `Do you really want to delete this item?`;
+    alert.buttons = [
+        {
+          text: 'No',
+          role: 'cancel',
+          cssClass: 'secondary'
+        }, {
+          text: 'Yes',
+          handler: deleteItem
+        }
+      ];
+
+    document.body.appendChild(alert);
+    return alert.present();
+}
+
+//Return data for Home.js
 const getHomeData = () => {
-    let walletoItems = getWalletoItems();
+    walletoItems = getWalletoItems();
     let dateSet = new Set(walletoItems.map(item => convertDate(item.date)));
     
     let dateArray = Array.from(dateSet).sort(function(a,b){
@@ -116,51 +151,56 @@ const getHomeData = () => {
     
     return {dateArray, totalIncome, totalExpenses};
 }
+
+//Return walletoItems list
 const getWalletoItems = () => {
-    var items = JSON.parse(localStorage.getItem('Walleto-allItems'));
-    if(items == null) {
-        items = []
-        localStorage.setItem('Walleto-allItems',JSON.stringify([]));
+    if(walletoItems == null) {
+        walletoItems = JSON.parse(localStorage.getItem('Walleto-allItems'));
+        if(walletoItems == null) {
+            walletoItems = [];
+            localStorage.setItem('Walleto-allItems',JSON.stringify(walletoItems));
+        }
     }
-    return items;
+    return walletoItems;
 }
 
+//Return single walletoItem by its id
 const getSingleWalletoItem = (id) => {
-    let walletoItems = getWalletoItems();
-    let categories = getCategories();
-    let walletoItem = walletoItems.find(element => element.id === id);
-    walletoItem.category = categories.find(element => element.id === walletoItem.category);
-    return walletoItem;
+    walletoItems = getWalletoItems();
+    categories = getCategories();
+    let singleWalletoItem = {...walletoItems.find(element => element.id === id)};
+    singleWalletoItem.category = categories.find(element => element.id === singleWalletoItem.category);
+    return singleWalletoItem;
 }
 
-const addWalletoItem = (newItem, callback) => {
-    var items = JSON.parse(localStorage.getItem('Walleto-allItems'));
-    if(items == null) {
-        items = []
-        localStorage.setItem('Walleto-allItems',JSON.stringify(items));
-    }
+//Add new item to walletoItems
+const addWalletoItem = (newWalletoItem, callback) => {
+    walletoItems = getWalletoItems();
     
-    if(!newItem.id){
+    if(!newWalletoItem.id){
         var newID = Math.random().toString(36).substr(2, 9);
-        newItem.id = newID;
+        newWalletoItem.id = newID;
     }
     
-    items.push(newItem);
-    localStorage.setItem('Walleto-allItems', JSON.stringify(items));
+    walletoItems.push(newWalletoItem);
+    
+    localStorage.setItem('Walleto-allItems', JSON.stringify(walletoItems));
     sessionStorage.setItem("refreshHome", true);
-    callback(undefined, items);
+    callback(undefined, walletoItems);
 }
 
+//Return a list of walletoItems with spesific date
 const getWalletoItemsByDate = (date) => {
-    let items = getWalletoItems();
-    let categories = getCategories();
+    walletoItems = getWalletoItems();
+    categories = getCategories();
     
-    let newItems = items.filter(item => convertDate(item.date) === date);
+    let newItems = [...(walletoItems.filter(item => convertDate(item.date) === date))];
     newItems = newItems.map(item => {
         let category = item.category;
-        let categoryObj = categories.find(itemCat => itemCat.id === item.category)
-        item.category = categoryObj;
-        return item;
+        let categoryObj = categories.find(itemCat => itemCat.id === item.category);
+        let itemObj = {...item}
+        itemObj.category = categoryObj;
+        return itemObj;
     });
     newItems = newItems.reverse();
     
@@ -168,56 +208,51 @@ const getWalletoItemsByDate = (date) => {
     let incomeArray = newItems.filter(item => item.type === "income").map(item => Number(item.money));
     let totalExpenses = expenseArray.reduce((a, b) => a + b, 0);
     let totalIncome = incomeArray.reduce((a, b) => a + b, 0);
-    
     return { newItems, totalIncome, totalExpenses };
 }
 
-const getCategories = () => {
-    var items = JSON.parse(localStorage.getItem('Walleto-categories'));
-    if(items == null) {
-        items = [
-        {
-        "id":"food",
-        "icon":"restaurant",
-        "name":"Food",
-        "color":"#2693ff",
-        "type":"expenses",
-        "userAdded":false
-        },{
-        "id":"bills",
-        "icon":"receipt",
-        "name":"Bills",
-        "color":"#FF0000",
-        "type":"expenses",
-        "userAdded":false
-        }]
-        localStorage.setItem('Walleto-categories',JSON.stringify(items));
-    }
-    return items;
+//Delete a walletoItem with its id
+const deleteWalletoItem = (id, callback) => {
+    walletoItems = getWalletoItems();
+    walletoItems = walletoItems.filter((item) => {
+        return item.id !== id;
+    });
+    localStorage.setItem('Walleto-allItems', JSON.stringify(walletoItems));
+    
+    callback(categories)
 }
 
-const addCategoryItem = (newItem, callback) => {
-    var items = JSON.parse(localStorage.getItem('Walleto-categories'));
-    
-    if(items == null) {
-        items = []
-        localStorage.setItem('Walleto-categories',JSON.stringify(items));
+//return categories list
+const getCategories = () => {
+    if(categories == null) {
+        categories = JSON.parse(localStorage.getItem('Walleto-categories'));
+        if(categories == null) {
+            categories = defaultCategories();
+            localStorage.setItem('Walleto-categories',JSON.stringify(categories));
+        }
     }
+    return categories;
+}
+
+//Add an new item to categories list
+const addCategoryItem = (newItem, callback) => {
+    categories = getCategories();
     
-    var isExist = items.some(category => category.id == newItem.id);
+    var isExist = categories.some(category => category.id == newItem.id);
     if (isExist) {
       callback(`Category already exist with the name ${newItem.name}`, undefined)
     } else {
-       items.push(newItem);
-       localStorage.setItem('Walleto-categories', JSON.stringify(items));
+       categories.push(newItem);
+       localStorage.setItem('Walleto-categories', JSON.stringify(categories));
        sessionStorage.setItem("refreshCategories", true);
-       callback(undefined, items)
+       callback(undefined, categories)
     }
 }
 
+//Delete an item from categories list
 const deleteCategoryItem = (id, callback) => {
-    let categories = getCategories();
-    let walletoItems = getWalletoItems();
+    categories = getCategories();
+    walletoItems = getWalletoItems();
     categories = categories.filter((item) => {
         return item.id !== id;
     });
@@ -246,6 +281,7 @@ function rgb2hex(rgb) {
     return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
 }
 
+//Convert date to walleto date form with day and without day
 function convertDate(inputFormat, withDay = false) {
     var weekday = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     function pad(s) { 
@@ -260,8 +296,169 @@ function convertDate(inputFormat, withDay = false) {
     }
 }
 
+//Capitalize first letter of string
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 
+
+//Return a default list for categories list
+const defaultCategories = () => {
+    return [
+{
+"id":"food",
+"icon":"restaurant",
+"name":"Food",
+"color":"#e53935",
+"type":"expenses",
+"userAdded":false
+},{
+"id":"bills",
+"icon":"receipt",
+"name":"Bills",
+"color":"#d81b60",
+"type":"expenses",
+"userAdded":false
+},{
+"id":"home",
+"icon":"home",
+"name":"Home",
+"color":"#8e24aa",
+"type":"expenses",
+"userAdded":false
+},{
+"id":"transportation",
+"icon":"subway",
+"name":"Transportation",
+"color":"#5e35b1",
+"type":"expenses",
+"userAdded":false
+},{
+"id":"car",
+"icon":"car-sport",
+"name":"Car",
+"color":"#3949ab",
+"type":"expenses",
+"userAdded":false
+},{
+"id":"entertainment",
+"icon":"game-controller",
+"name":"Entertainment",
+"color":"#1e88e5",
+"type":"expenses",
+"userAdded":false
+},{
+"id":"shopping",
+"icon":"cart",
+"name":"Shopping",
+"color":"#039be5",
+"type":"expenses",
+"userAdded":false
+},{
+"id":"clothing",
+"icon":"shirt",
+"name":"Clothing",
+"color":"#00acc1",
+"type":"expenses",
+"userAdded":false
+},{
+"id":"insurance",
+"icon":"shield-checkmark",
+"name":"Insurance",
+"color":"#00897b",
+"type":"expenses",
+"userAdded":false
+},{
+"id":"tax",
+"icon":"reader",
+"name":"Tax",
+"color":"#43a047",
+"type":"expenses",
+"userAdded":false
+},{
+"id":"telephone",
+"icon":"call",
+"name":"Telephone",
+"color":"#7cb342",
+"type":"expenses",
+"userAdded":false
+},{
+"id":"health",
+"icon":"medkit",
+"name":"Health",
+"color":"#c0ca33",
+"type":"expenses",
+"userAdded":false
+},{
+"id":"sport",
+"icon":"football",
+"name":"Sport",
+"color":"#fdd835",
+"type":"expenses",
+"userAdded":false
+},{
+"id":"electronics",
+"icon":"watch",
+"name":"Electronics",
+"color":"#ffb300",
+"type":"expenses",
+"userAdded":false
+},{
+"id":"gift",
+"icon":"gift",
+"name":"Gift",
+"color":"#fb8c00",
+"type":"expenses",
+"userAdded":false
+},{
+"id":"travel",
+"icon":"airplane",
+"name":"Travel",
+"color":"#f4511e",
+"type":"expenses",
+"userAdded":false
+},{
+"id":"education",
+"icon":"school",
+"name":"Education",
+"color":"#6d4c41",
+"type":"expenses",
+"userAdded":false
+},{
+"id":"office",
+"icon":"attach",
+"name":"Office",
+"color":"#757575",
+"type":"expenses",
+"userAdded":false
+},{
+"id":"other",
+"icon":"grid",
+"name":"Other",
+"color":"#546e7a",
+"type":"both",
+"userAdded":false
+},{
+"id":"salary",
+"icon":"wallet",
+"name":"Salary",
+"color":"#01579b",
+"type":"income",
+"userAdded":false
+},{
+"id":"awards",
+"icon":"medal",
+"name":"Awards",
+"color":"#004d40",
+"type":"income",
+"userAdded":false
+},{
+"id":"sale",
+"icon":"pricetag",
+"name":"Sale",
+"color":"#1a237e",
+"type":"income",
+"userAdded":false
+}]
+}

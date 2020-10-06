@@ -1,6 +1,6 @@
 export default class Settings extends HTMLElement {
   connectedCallback() {
-    let enableDarkMode = localStorage.getItem('enableDarkMode')?true:false;
+    let enableDarkMode = localStorage.getItem('enableDarkMode')==="true"?true:false;
     this.innerHTML = `
       <ion-header translucent>
         <ion-toolbar>

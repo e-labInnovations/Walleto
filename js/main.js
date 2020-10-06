@@ -12,14 +12,14 @@ Router.addEventListener('ionRouteDidChange', (e) => {
     let routerFrom = e.detail.from;
     
     if(routeTo === '/') {
-        let refresh = sessionStorage.getItem("refreshHome");
+        let refresh = sessionStorage.getItem("refreshHome")==="true"?true:false;
         if(refresh) {
             document.querySelector('home-page').connectedCallback();
             sessionStorage.setItem("refreshHome", false);
         }
     }
     if(routeTo === '/categories') {
-        let refresh = sessionStorage.getItem("refreshCategories");
+        let refresh = sessionStorage.getItem("refreshCategories")==="true"?true:false;
         if(refresh) {
             document.querySelector('categories-page').connectedCallback();
             sessionStorage.setItem("refreshCategories", false);
@@ -27,7 +27,7 @@ Router.addEventListener('ionRouteDidChange', (e) => {
     }
 })
 
-let enableDarkMode = localStorage.getItem('enableDarkMode');
+let enableDarkMode = localStorage.getItem('enableDarkMode')==="true"?true:false;
 if (enableDarkMode) {
   document.querySelector('body').classList.add('dark')
 }

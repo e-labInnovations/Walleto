@@ -27,7 +27,7 @@ export default class AddNewCategory extends HTMLElement {
       
         <ion-item>
             <ion-label>Type</ion-label>
-            <ion-select value="expenses" id="categorySelect">
+            <ion-select value="expenses" id="categorySelect" interface="popover">
                 <ion-select-option value="expenses">Expenses</ion-select-option>
                 <ion-select-option value="income">Income</ion-select-option>
                 <ion-select-option value="both">Both</ion-select-option>

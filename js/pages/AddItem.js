@@ -1,4 +1,3 @@
-//import { categories } from '../categories.js';
 
 export default class addItem extends HTMLElement {
   connectedCallback() {

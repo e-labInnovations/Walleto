@@ -1,4 +1,3 @@
-import { categories } from '../../categories.js';
 
 export default class DetailedItemModal extends HTMLElement {
   connectedCallback() {
@@ -57,10 +56,10 @@ export default class DetailedItemModal extends HTMLElement {
             <ion-fab-button>
                 <ion-icon name="settings"></ion-icon>
             </ion-fab-button>
-            <ion-fab-list side="start">
+            <ion-fab-list side="start" onclick="handleDeleteWalletoItem('${walletoItem.id}')">
                 <ion-fab-button color="danger"><ion-icon name="trash"></ion-icon></ion-fab-button>
             </ion-fab-list>
-            <ion-fab-list side="end">
+            <ion-fab-list side="end" onclick="presentToast('Not implemented')">
                 <ion-fab-button color="primary"><ion-icon name="create"></ion-icon></ion-fab-button>
             </ion-fab-list>
         </ion-fab>

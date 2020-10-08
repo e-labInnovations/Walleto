@@ -59,7 +59,7 @@ export default class DetailedItemModal extends HTMLElement {
             <ion-fab-list side="start" onclick="handleDeleteWalletoItem('${walletoItem.id}')">
                 <ion-fab-button color="danger"><ion-icon name="trash"></ion-icon></ion-fab-button>
             </ion-fab-list>
-            <ion-fab-list side="end" onclick="presentToast('Not implemented')">
+            <ion-fab-list side="end" id="btnEdit">
                 <ion-fab-button color="primary"><ion-icon name="create"></ion-icon></ion-fab-button>
             </ion-fab-list>
         </ion-fab>
@@ -69,11 +69,18 @@ export default class DetailedItemModal extends HTMLElement {
     
     
     const btnClose = document.getElementById("btnClose");
+    const btnEdit = document.getElementById("btnEdit");
     
     btnClose.addEventListener("click", () => {
         modalElement.dismiss({
             'dismissed': true
         });
+    });
+    btnEdit.addEventListener("click", () => {
+        modalElement.dismiss({
+            'dismissed': true
+        });
+        document.querySelector('ion-router').push(`/editItem/${id}`)
     });
   }
 }

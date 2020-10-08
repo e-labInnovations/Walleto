@@ -141,7 +141,12 @@ const getHomeData = () => {
     let dateSet = new Set(walletoItems.map(item => convertDate(item.date)));
     
     let dateArray = Array.from(dateSet).sort(function(a,b){
-      return new Date(b) - new Date(a);
+        var dateAParts = a.split("-");
+        var dateAObject = new Date(+dateAParts[2], dateAParts[1] - 1, +dateAParts[0]);
+        var dateBParts = b.split("-");
+        var dateBObject = new Date(+dateBParts[2], dateBParts[1] - 1, +dateBParts[0]);
+        
+        return dateBObject - dateAObject;
     });
     
     let expenseArray = walletoItems.filter(item => item.type === "expenses").map(item => Number(item.money));
@@ -169,8 +174,12 @@ const getSingleWalletoItem = (id) => {
     walletoItems = getWalletoItems();
     categories = getCategories();
     let singleWalletoItem = {...walletoItems.find(element => element.id === id)};
-    singleWalletoItem.category = categories.find(element => element.id === singleWalletoItem.category);
-    return singleWalletoItem;
+    if(walletoItems.findIndex(element => element.id === id) != -1) {
+        singleWalletoItem.category = categories.find(element => element.id === singleWalletoItem.category);
+        return singleWalletoItem;
+    } else {
+        return null; 
+    }
 }
 
 //Add new item to walletoItems
@@ -180,13 +189,20 @@ const addWalletoItem = (newWalletoItem, callback) => {
     if(!newWalletoItem.id){
         var newID = Math.random().toString(36).substr(2, 9);
         newWalletoItem.id = newID;
+    
+        walletoItems.push(newWalletoItem);
+        
+        localStorage.setItem('Walleto-allItems', JSON.stringify(walletoItems));
+        sessionStorage.setItem("refreshHome", true);
+        callback(undefined, walletoItems);
+    } else {
+        let position = walletoItems.findIndex((element => element.id === newWalletoItem.id))
+        walletoItems[position] = newWalletoItem;
+        
+        localStorage.setItem('Walleto-allItems', JSON.stringify(walletoItems));
+        sessionStorage.setItem("refreshHome", true);
+        callback(undefined, walletoItems);
     }
-    
-    walletoItems.push(newWalletoItem);
-    
-    localStorage.setItem('Walleto-allItems', JSON.stringify(walletoItems));
-    sessionStorage.setItem("refreshHome", true);
-    callback(undefined, walletoItems);
 }
 
 //Return a list of walletoItems with spesific date

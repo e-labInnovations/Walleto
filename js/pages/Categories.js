@@ -57,14 +57,9 @@ export default class CategoriesPage extends HTMLElement {
             (category) => `
               <ion-item-sliding>
                 ${category.userAdded ? `
-                <ion-item-options side="start" onclick="handleDeleteCategoryItem('${category.id}')">
+                <ion-item-options side="end" onclick="handleDeleteCategoryItem('${category.id}')">
                   <ion-item-option color="danger">
                     <ion-icon slot="icon-only" name="trash"></ion-icon>
-                  </ion-item-option>
-                </ion-item-options>
-                <ion-item-options side="end" onclick="presentToast('Not implemented')">
-                  <ion-item-option color="tertiary">
-                    <ion-icon slot="icon-only" name="create"></ion-icon>
                   </ion-item-option>
                 </ion-item-options>
                 ` : ''}

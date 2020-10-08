@@ -2,14 +2,21 @@
 export default class addItem extends HTMLElement {
   connectedCallback() {
     const categories = getCategories(); //From app.js
-    let currentCategories = categories.filter(category => category.type != "income").sort(sortByName());
+    let id = this.id;
+    let editItem = getSingleWalletoItem(id);
+    let type = "income";
+    if(editItem != null) {
+        type = editItem.type == "income" ? "expenses" : "income";
+    }
+    let currentCategories = categories.filter(category => category.type != type).sort(sortByName());
+    
     this.innerHTML = `
     <ion-header translucent>
         <ion-toolbar>
             <ion-buttons slot="start">
                 <ion-back-button default-href="/"></ion-back-button>
             </ion-buttons>
-            <ion-select value="expenses" interface="popover" style="width:90%;" id="typeSelector">
+            <ion-select value="${editItem?editItem.type:"expenses"}" interface="popover" style="width:90%;" id="typeSelector">
                 <ion-select-option value="expenses">Expenses</ion-select-option>
                 <ion-select-option value="income">Income</ion-select-option>
             </ion-select>
@@ -24,17 +31,17 @@ export default class addItem extends HTMLElement {
         <ion-grid>
             <ion-row>
                 <ion-col size="8">
-                    <ion-input placeholder="Memo" autocomplete="on" id="input-memo" enterkeyhint="next" spellcheck=true></ion-input>
+                    <ion-input placeholder="Memo" value="${editItem?editItem.memo:""}" autocomplete="on" id="input-memo" enterkeyhint="next" spellcheck=true></ion-input>
                 </ion-col>
                 <ion-col size="4">
-                    <ion-input class="ion-text-end" placeholder="Amount" id="input-amount" type="number" autofocus=true enterkeyhint="done" inputmode="numeric" required=true style="font-weight: bold; font-size:18px;"></ion-input>
+                    <ion-input class="ion-text-end" value="${editItem?editItem.money:""}" placeholder="Amount" id="input-amount" type="number" autofocus=true enterkeyhint="done" inputmode="numeric" required=true style="font-weight: bold; font-size:18px;"></ion-input>
                 </ion-col>
             </ion-row>
         </ion-grid>
     </ion-item>
     <ion-item>
       <ion-label>Date</ion-label>
-      <ion-datetime display-format="DD-MMM-YYYY" placeholder="Select Date"  value="${new Date()}"></ion-datetime>
+      <ion-datetime display-format="DD-MMM-YYYY" placeholder="Select Date"  value="${editItem?editItem.date:(new Date())}"></ion-datetime>
     </ion-item>
     
     <ion-content class="ion-padding">
@@ -54,6 +61,10 @@ export default class addItem extends HTMLElement {
     const btnSubmit = document.getElementById("btnSubmit");
     const typeSelector = document.getElementById('typeSelector');
     const categoriesList = document.getElementById('categoriesList');
+    
+    if(editItem != null) {
+        handleCategorySelect(editItem.category.icon,editItem.category.color,editItem.category.id)
+    }
     
     typeSelector.addEventListener('ionChange', (ev) => {
         let currentCategoryAvatar = document.getElementById("currentCategoryAvatar");
@@ -83,7 +94,12 @@ export default class addItem extends HTMLElement {
         const type = typeSelector.value;
         const date = dateInput.value;
         const memo = memoInput.value ? memoInput.value : "";
-        const newItem = {category, money, date, memo, type}
+        let id = null;
+        if(editItem != null) {
+            id = editItem.id;
+        }
+        const newItem = {category, money, date, memo, type, id}
+    
         if(!money>0) {
             const alert = document.createElement('ion-alert');
             alert.header = 'Error';
@@ -95,7 +111,12 @@ export default class addItem extends HTMLElement {
             return alert.present();
         } else {
             addWalletoItem(newItem, (error, data) => {
-                presentToast("New item added successfully");
+                if(editItem != null) {
+                    presentToast("Item modified successfully");
+                } else {
+                    presentToast("New item added successfully");
+                }
+                
                 document.querySelector('ion-router').back();
             })
         }

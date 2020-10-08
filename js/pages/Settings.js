@@ -5,7 +5,7 @@ export default class Settings extends HTMLElement {
       <ion-header translucent>
         <ion-toolbar>
           <ion-buttons slot="start">
-            <ion-back-button defaultHref="/" id="back"></ion-back-button>
+            <ion-back-button default-href="/" id="back"></ion-back-button>
           </ion-buttons>
           <ion-title>Settings</ion-title>
         </ion-toolbar>

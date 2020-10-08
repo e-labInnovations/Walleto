@@ -24,9 +24,9 @@ export default class HomePage extends HTMLElement {
                         <ion-icon name="grid-outline" slot="start"></ion-icon>
                         <ion-label>Categories</ion-label>
                       </ion-item>
-                      <ion-item>
+                      <ion-item href="/export">
                         <ion-icon name="open-outline" slot="start"></ion-icon>
-                        <ion-label>Expert</ion-label>
+                        <ion-label>Backup & Expert</ion-label>
                       </ion-item>
                       <ion-item href="/settings">
                         <ion-icon name="settings-outline" slot="start"></ion-icon>
@@ -36,7 +36,7 @@ export default class HomePage extends HTMLElement {
                         <ion-icon name="star-outline" slot="start"></ion-icon>
                         <ion-label>Rate Us</ion-label>
                       </ion-item>
-                      <ion-item>
+                      <ion-item href="/about">
                         <ion-icon name="information-circle-outline" slot="start"></ion-icon>
                         <ion-label>About</ion-label>
                       </ion-item>

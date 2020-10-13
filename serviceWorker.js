@@ -4,6 +4,7 @@ const offlineFallbackPage = [
   "/index.html",
   "/css/style.css",
   "/css/variables.css",
+  "/images/offline.png",
   "https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css",
   "https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js",
   "https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js",
@@ -24,12 +25,10 @@ self.addEventListener("install", function (event) {
   event.waitUntil(
     caches.open(CACHE).then(function (cache) {
       console.log("Cached offline page during install");
- 
-      /*
-      if (offlineFallbackPage === "ToDo-replace-this-name.html") {
+
+      if (offlineFallbackPage === "offline.html") {
         return cache.add(new Response("Update the value of the offlineFallbackPage constant in the serviceworker."));
       }
-      */
       
       return cache.addAll(offlineFallbackPage);
     })

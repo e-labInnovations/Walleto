@@ -6,6 +6,7 @@ import DetailedItemModal from './pages/components/DetailedItemModal.js'
 import Settings from './pages/Settings.js'
 import Export from './pages/Export.js'
 import About from './pages/About.js'
+import Filter from './pages/Filter.js'
 
 const Router = document.querySelector('ion-router');
 

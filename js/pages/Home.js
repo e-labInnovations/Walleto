@@ -50,7 +50,7 @@ export default class HomePage extends HTMLElement {
                       <ion-buttons slot="start">
                         <ion-menu-button></ion-menu-button>
                       </ion-buttons>
-                      <ion-buttons slot="end" onclick="presentToast('Not implemented')">
+                      <ion-buttons slot="end" id="btnFilter">
                         <ion-icon  slot="icon-only" class="icon-tool" ios="ios-options-outline" md="md-options"></ion-icon>
                       </ion-buttons>
                       <ion-title>Walleto</ion-title>
@@ -105,10 +105,16 @@ export default class HomePage extends HTMLElement {
             `;
             
         let router = document.querySelector('ion-router');
+        let btnFilter = document.getElementById('btnFilter');
+        
         router.addEventListener("ionRouteWillChange", () => {
           if (menuController.isOpen()) {
             menuController.close();
           }
+        })
+        
+        btnFilter.addEventListener('click', () => {
+          router.push('/filter')
         })
     }
 }

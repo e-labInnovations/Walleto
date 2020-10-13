@@ -1,4 +1,4 @@
-
+ 
 export default class DetailedItemModal extends HTMLElement {
   connectedCallback() {
     const modalElement = document.querySelector('ion-modal');
@@ -29,7 +29,7 @@ export default class DetailedItemModal extends HTMLElement {
                 </ion-label>
             </ion-item>
           </ion-card-header>
-
+ 
           <ion-card-content>
             <ion-grid>
                 <ion-row>
@@ -84,5 +84,5 @@ export default class DetailedItemModal extends HTMLElement {
     });
   }
 }
-
+ 
 customElements.define("detailed-item-modal", DetailedItemModal);

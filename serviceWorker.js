@@ -5,6 +5,7 @@ const offlineFallbackPage = [
   "/css/style.css",
   "/css/variables.css",
   "/images/offline.png",
+  "/offline.html",
   "https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css",
   "https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js",
   "https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js",

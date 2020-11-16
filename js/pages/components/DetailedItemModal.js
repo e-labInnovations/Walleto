@@ -76,6 +76,7 @@ export default class DetailedItemModal extends HTMLElement {
             'dismissed': true
         });
     });
+    
     btnEdit.addEventListener("click", () => {
         modalElement.dismiss({
             'dismissed': true

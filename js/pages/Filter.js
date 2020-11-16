@@ -28,28 +28,29 @@ export default class Filter extends HTMLElement {
           <ion-list-header lines="inset">
             <ion-label>Category</ion-label>
           </ion-list-header>
-            <ion-item>
-              <ion-checkbox slot="start" value="all" checked></ion-checkbox>
-              <ion-avatar slot="end"  style="background-color: #000000;">
-                <ion-icon name="checkmark-done"></ion-icon>
-              </ion-avatar>
-              <ion-label>
-                <h3>All</h3>
-              </ion-label>
-            </ion-item>
-            ${listHTMLData(categories)}
+          ${listHTMLData(categories)}
         </ion-list>
         
       </ion-content>
       <ion-button color="primary" id="btnSubmit">Save</ion-button>
     `;
     
+    let toggle = document.querySelectorAll('ion-toggle');
+    let btnSubmit = document.getElementById('btnSubmit');
+    
+    btnSubmit.addEventListener('click', () => {
+      let filterCats = [];
+      toggle.forEach(tg => {
+        //console.log(tg);
+      })
+    })
+    
     function listHTMLData(categories) {
         return categories.map(
             (category) => `
                 <ion-item>
-                  <ion-checkbox slot="start" value="${category.id}" checked=false></ion-checkbox>
-                  <ion-avatar slot="end"  style="background-color: ${category.color};">
+                  <ion-toggle slot="end" value="${category.id}" checked=true></ion-toggle>
+                  <ion-avatar slot="start"  style="background-color: ${category.color};">
                     <ion-icon name="${category.icon}"></ion-icon>
                   </ion-avatar>
                   <ion-label>

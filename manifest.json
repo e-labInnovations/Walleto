@@ -1,8 +1,10 @@
 {
   "name": "Waletto",
   "short_name": "Waletto",
+  "description": "Money management app",
   "start_url": "./index.html",
   "display": "standalone",
+  "scope": "/",
   "background_color": "#ffffff",
   "theme_color": "#ffffff",
   "orientation": "portrait-primary",
@@ -39,5 +41,21 @@
       "src": "/images/icons/android-chrome-512x512.png",
       "type": "image/png", "sizes": "512x512"
     }
-  ]
+  ],
+  "shortcuts": [
+      {
+        "name": "Add new item",
+        "short_name": "Add",
+        "description": "Add new item to your Walleto.",
+        "url": "/#/addItem",
+        "icons": [{ "src": "/images/add.png", "sizes": "192x192" }]
+      },
+      {
+        "name": "Add new category",
+        "short_name": "Add Category",
+        "description": "Add a new category item to your Walleto.",
+        "url": "/#/categories/addNew",
+        "icons": [{ "src": "/images/add.png", "sizes": "192x192" }]
+      }
+    ]
 }

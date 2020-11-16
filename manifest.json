@@ -10,6 +10,7 @@
   "orientation": "natural",
   "lang": "en",
   "dir": "ltr\rtl",
+  "categories": ["Walleto", "Money", "Management", "e-lab innovations", "Ashad"],
   "icons": [
     {
       "src": "/images/icons/android-chrome-72x72.png",
@@ -67,5 +68,32 @@
       "url": "/#/categories/addNew",
       "icons": [{ "src": "/images/add.png", "sizes": "192x192" }]
     }
-    ]
+  ],
+  "screenshots" : [
+    {
+      "src": "/images/screenshots/ss1.jpg",
+      "sizes": "720x1280",
+      "type": "image/jpg"
+    },
+    {
+      "src": "/images/screenshots/ss2.jpg",
+      "sizes": "720x1280",
+      "type": "image/jpg"
+    },
+    {
+      "src": "/images/screenshots/ss2.jpg",
+      "sizes": "720x1280",
+      "type": "image/jpg"
+    },
+    {
+      "src": "/images/screenshots/ss4.jpg",
+      "sizes": "720x1280",
+      "type": "image/jpg"
+    },
+    {
+      "src": "/images/screenshots/ss5.jpg",
+      "sizes": "720x1280",
+      "type": "image/jpg"
+    }
+  ]
 }

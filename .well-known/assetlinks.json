@@ -1,7 +1,10 @@
 [{
   "relation": ["delegate_permission/common.handle_all_urls"],
-  "target" : {
-    "namespace": "android_app", "package_name": "app.netlify.walleto.twa",
-    "sha256_cert_fingerprints": ["61:51:65:18:9D:F9:69:F6:3E:7E:21:42:0F:2B:2F:63:98:D9:8B:16:7C:CB:19:89:C3:BD:F0:C3:50:38:B6:3C"]
+  "target": {
+    "namespace": "android_app",
+    "package_name": "app.netlify.walleto.twa",
+    "sha256_cert_fingerprints": [
+      "1F:07:81:CA:41:54:FD:6F:48:3A:8D:0B:86:DC:8E:73:94:35:B3:AF:3C:B0:A9:38:AA:5D:23:93:2C:5D:0A:30"
+    ]
   }
 }]
